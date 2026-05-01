@@ -137,7 +137,7 @@ export default function Pricing() {
                       <span className="text-sm font-semibold text-gray-500">FCFA</span>
                     </div>
                     <a
-                      href="https://topic-exam.netlify.app/"
+                      href="https://topic-exams.netlify.app/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group-hover:gap-3"
@@ -152,7 +152,7 @@ export default function Pricing() {
           })}
         </div>
 
-        <div className="mt-12 bg-gray-50 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between border border-gray-100">
+        {/* <div className="mt-12 bg-gray-50 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between border border-gray-100">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
               <Check className="w-5 h-5 text-green-600" />
@@ -171,7 +171,7 @@ export default function Pricing() {
             Nous contacter
             <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );

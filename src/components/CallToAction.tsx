@@ -31,7 +31,7 @@ export default function CallToAction() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://topic-exam.netlify.app/"
+                href="https://topic-exams.netlify.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-orange-500/40 hover:-translate-y-0.5 text-lg"
