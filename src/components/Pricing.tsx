@@ -1,158 +1,177 @@
-import { Check, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { BarChart3, Briefcase, Globe2, ShieldCheck, Check, ArrowRight, Sparkles } from 'lucide-react';
 
-const plans = [
+const PRICE = '200.000 FCFA';
+
+const categories = [
   {
-    name: 'Basic',
-    price: '4 900',
-    period: 'FCFA / mois',
-    description: 'Idéal pour débuter votre parcours d\'apprentissage.',
-    color: 'bg-white border-gray-200',
-    badgeColor: '',
-    buttonStyle: 'bg-blue-600 hover:bg-blue-700 text-white',
-    popular: false,
-    features: [
-      'Accès à 10 formations',
-      'Vidéos HD',
-      'Exercices pratiques',
-      'Forum de la communauté',
-      'Certificat de participation',
-      null,
-      null,
+    id: 'data',
+    label: 'Data & IT',
+    icon: BarChart3,
+    accent: 'from-blue-500 to-cyan-500',
+    badge: 'bg-blue-50 text-blue-700',
+    ring: 'ring-blue-500',
+    courses: [
+      'Data Analytics',
+      'Data Science',
+      'Business Intelligence',
+      'Excel Avancé',
+      'Programmation (Python, SQL, Power BI)',
     ],
   },
   {
-    name: 'Standard',
-    price: '9 900',
-    period: 'FCFA / mois',
-    description: 'Pour les apprenants qui veulent aller plus loin.',
-    color: 'bg-white border-gray-200',
-    badgeColor: '',
-    buttonStyle: 'bg-blue-600 hover:bg-blue-700 text-white',
-    popular: false,
-    features: [
-      'Accès à 50 formations',
-      'Vidéos HD & ressources',
-      'Exercices + projets réels',
-      'Forum de la communauté',
-      'Certificat officiel',
-      'Support par email (48h)',
-      null,
-    ],
+    id: 'projets',
+    label: 'Gestion de projets',
+    icon: Briefcase,
+    accent: 'from-orange-500 to-amber-500',
+    badge: 'bg-orange-50 text-orange-700',
+    ring: 'ring-orange-500',
+    courses: ['Gestion de projets', 'PMP', 'CAPM', 'Project DPro'],
   },
   {
-    name: 'Premium',
-    price: '19 900',
-    period: 'FCFA / mois',
-    description: 'L\'offre complète pour les professionnels ambitieux.',
-    color: 'bg-blue-700 border-blue-700',
-    badgeColor: 'bg-orange-500 text-white',
-    buttonStyle: 'bg-orange-500 hover:bg-orange-600 text-white',
-    popular: true,
-    features: [
-      'Accès illimité aux formations',
-      'Vidéos 4K & ressources exclusives',
-      'Projets & cas pratiques avancés',
-      'Communauté privée Premium',
-      'Certificat officiel reconnu',
-      'Mentorat personnalisé (2x/mois)',
-      'Accès à vie au contenu',
-    ],
+    id: 'ong',
+    label: 'Programmes & ONG',
+    icon: Globe2,
+    accent: 'from-emerald-500 to-teal-500',
+    badge: 'bg-emerald-50 text-emerald-700',
+    ring: 'ring-emerald-500',
+    courses: ['Program DPro', 'Social Good DPro', 'MEAL DPro', 'Finance DPro'],
+  },
+  {
+    id: 'audit',
+    label: 'Audit & Conformité',
+    icon: ShieldCheck,
+    accent: 'from-purple-500 to-fuchsia-500',
+    badge: 'bg-purple-50 text-purple-700',
+    ring: 'ring-purple-500',
+    courses: ['CIA 1', 'CIA 2', 'CIA 3', 'CISA', 'CFE'],
   },
 ];
 
+const allFormations = categories.flatMap((c) =>
+  c.courses.map((name) => ({ name, category: c }))
+);
+
 export default function Pricing() {
+  const [activeTab, setActiveTab] = useState<string>('all');
+
+  const visible =
+    activeTab === 'all'
+      ? allFormations
+      : allFormations.filter((f) => f.category.id === activeTab);
+
   return (
     <section id="tarifs" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block bg-blue-50 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Tarifs
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            Tarif unique
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
-            Des offres adaptées à tous les budgets
+            Toutes nos formations à <span className="text-blue-600">200.000 FCFA</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Choisissez la formule qui correspond à vos objectifs. Sans engagement, résiliable à tout moment.
+            Un prix clair et identique pour chaque formation — quel que soit le domaine ou le niveau.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-stretch">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative rounded-2xl border-2 p-8 flex flex-col card-hover ${plan.color} ${
-                plan.popular ? 'shadow-2xl scale-105' : 'shadow-sm'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className={`flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full shadow-md ${plan.badgeColor}`}>
-                    <Zap className="w-3.5 h-3.5" />
-                    RECOMMANDE
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h3 className={`text-xl font-bold mb-1 ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
-                  {plan.name}
-                </h3>
-                <p className={`text-sm ${plan.popular ? 'text-blue-200' : 'text-gray-500'}`}>
-                  {plan.description}
-                </p>
-              </div>
-
-              <div className="mb-8">
-                <span className={`text-4xl font-extrabold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
-                  {plan.price}
-                </span>
-                <span className={`text-sm ml-2 ${plan.popular ? 'text-blue-200' : 'text-gray-500'}`}>
-                  {plan.period}
-                </span>
-              </div>
-
-              <ul className="space-y-3 flex-1 mb-8">
-                {plan.features.map((feature, i) =>
-                  feature ? (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                        plan.popular ? 'bg-blue-500' : 'bg-green-100'
-                      }`}>
-                        <Check className={`w-3 h-3 ${plan.popular ? 'text-white' : 'text-green-600'}`} />
-                      </div>
-                      <span className={`text-sm ${plan.popular ? 'text-blue-100' : 'text-gray-600'}`}>
-                        {feature}
-                      </span>
-                    </li>
-                  ) : (
-                    <li key={i} className="flex items-start gap-3 opacity-30">
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                        plan.popular ? 'bg-blue-800' : 'bg-gray-100'
-                      }`}>
-                        <span className={`text-xs font-bold ${plan.popular ? 'text-blue-400' : 'text-gray-400'}`}>
-                          —
-                        </span>
-                      </div>
-                      <span className={`text-sm ${plan.popular ? 'text-blue-300' : 'text-gray-400'}`}>
-                        Non inclus
-                      </span>
-                    </li>
-                  )
-                )}
-              </ul>
-
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <button
+            onClick={() => setActiveTab('all')}
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+              activeTab === 'all'
+                ? 'bg-gray-900 text-white shadow-md'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            Toutes ({allFormations.length})
+          </button>
+          {categories.map((c) => {
+            const Icon = c.icon;
+            const active = activeTab === c.id;
+            return (
               <button
-                className={`w-full py-3.5 rounded-xl font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 ${plan.buttonStyle}`}
+                key={c.id}
+                onClick={() => setActiveTab(c.id)}
+                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  active
+                    ? 'bg-gray-900 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
               >
-                S'inscrire maintenant
+                <Icon className="w-4 h-4" />
+                {c.label}
               </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        <p className="text-center text-sm text-gray-400 mt-8">
-          Tous les prix incluent la TVA. Satisfait ou remboursé sous 7 jours.
-        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {visible.map((f) => {
+            const Icon = f.category.icon;
+            return (
+              <div
+                key={f.name}
+                className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
+              >
+                <div className={`h-1 bg-gradient-to-r ${f.category.accent}`} />
+
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${f.category.accent} flex items-center justify-center shadow-sm`}>
+                      <Icon className="w-4 h-4 text-white" />
+                    </div>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${f.category.badge}`}>
+                      {f.category.label}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-gray-900 mb-4 leading-snug min-h-[3rem] group-hover:text-blue-600 transition-colors">
+                    {f.name}
+                  </h3>
+
+                  <div className="mt-auto pt-4 border-t border-gray-100">
+                    <div className="flex items-baseline gap-1 mb-3">
+                      <span className="text-2xl font-extrabold text-gray-900">200.000</span>
+                      <span className="text-sm font-semibold text-gray-500">FCFA</span>
+                    </div>
+                    <a
+                      href="https://topic-exam.netlify.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group-hover:gap-3"
+                    >
+                      S'inscrire
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 bg-gray-50 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between border border-gray-100">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-green-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">Inclus dans chaque formation</p>
+              <p className="text-sm text-gray-500">
+                Support de cours, accompagnement formateur, certificat de participation et accès à la communauté.
+              </p>
+            </div>
+          </div>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap"
+          >
+            Nous contacter
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </section>
   );

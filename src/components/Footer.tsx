@@ -2,12 +2,12 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } 
 
 const footerLinks = {
   Formations: [
-    'Développement Web',
-    'Marketing Digital',
-    'Data Science',
-    'Finance & Compta',
-    'Leadership',
-    'Entrepreneuriat',
+    'Data & IT',
+    'Gestion de projets',
+    'Programmes & ONG',
+    'Audit & Conformité',
+    'PMP & CAPM',
+    'CIA, CISA & CFE',
   ],
   Entreprise: [
     'À propos',
@@ -47,23 +47,23 @@ export default function Footer() {
             </p>
 
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm">
+              <a href="mailto:kouassifreshnes@gmail.com" className="flex items-center gap-3 text-sm hover:text-white transition-colors">
                 <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>contact@eduafrique.com</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
+                <span>kouassifreshnes@gmail.com</span>
+              </a>
+              <a href="tel:+2250747908185" className="flex items-center gap-3 text-sm hover:text-white transition-colors">
                 <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>+221 77 000 00 00</span>
-              </div>
+                <span>+225 07 47 90 81 85</span>
+              </a>
               <div className="flex items-center gap-3 text-sm">
                 <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>Dakar, Sénégal — Abidjan, Côte d'Ivoire</span>
+                <span>Abidjan, Côte d'Ivoire</span>
               </div>
             </div>
 
             <div className="flex items-center gap-3 mt-6">
               {[
-                { icon: Facebook, href: '#' },
+                { icon: Facebook, href: 'https://www.facebook.com/share/18AYU7YMCx/' },
                 { icon: Twitter, href: '#' },
                 { icon: Instagram, href: '#' },
                 { icon: Linkedin, href: '#' },
@@ -72,6 +72,8 @@ export default function Footer() {
                 <a
                   key={i}
                   href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors duration-200"
                 >
                   <Icon className="w-4 h-4" />
@@ -98,26 +100,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-        </div>
-
-        {/* Newsletter */}
-        <div className="border-t border-gray-800 pt-10 mb-10">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <h4 className="text-white font-semibold mb-1">Restez informé</h4>
-              <p className="text-gray-400 text-sm">Recevez nos dernières formations et offres exclusives.</p>
-            </div>
-            <div className="flex w-full md:w-auto gap-2">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="flex-1 md:w-72 bg-gray-800 border border-gray-700 text-white placeholder-gray-500 text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-blue-500 transition-colors"
-              />
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors flex-shrink-0">
-                S'abonner
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Bottom bar */}

@@ -27,7 +27,7 @@ export default function Navbar() {
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          {['Formations', 'Avantages', 'Tarifs', 'Témoignages'].map((item) => (
+          {['Formations', 'Services', 'Avantages', 'Tarifs'].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -74,7 +74,7 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
-          {['Formations', 'Avantages', 'Tarifs', 'Témoignages'].map((item) => (
+          {['Formations', 'Services', 'Avantages', 'Tarifs'].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
